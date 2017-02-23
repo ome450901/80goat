@@ -3,8 +3,8 @@ var app = express();
 var router = express.Router();
 
 /* GET home page. */
-app.get('/', function(req, res, next) {
-  res.send('test page');
+app.get('/', function (req, res, next) {
+    res.send('test page');
 });
 
 var linebot = require('linebot');
@@ -19,19 +19,22 @@ var bot = linebot({
 });
 
 bot.on('message', function (event) {
-    event.reply(event.message.text).then(function (data) {
-        // success
-    }).catch(function (error) {
-        // error
-    });
+    if (event.message.type = 'text') {
+        event.reply(event.message.text).then(function (data) {
+            // success
+        }).catch(function (error) {
+            // error
+        });
+    }
     console.log(event);
+    console.log(event.message.content);
 });
 
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
-var server = app.listen(process.env.PORT || 8080, function() {
+var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
 });
