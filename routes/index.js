@@ -17,12 +17,14 @@ var bot = linebot({
     channelAccessToken: CHANNEL_ACCESS_TOKEN
 });
 
+
+
 bot.on('message', function (event) {
-    // event.reply(event.message.text).then(function (data) {
-    //     // success
-    // }).catch(function (error) {
-    //     // error
-    // });
+    event.reply(event.message.text).then(function (data) {
+        // success
+    }).catch(function (error) {
+        // error
+    });
     console.log(event);
 });
 
